@@ -5,17 +5,16 @@
   <title> Slideshow| WebApp Protos </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/social-buttons.css">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="../css/social-buttons.css">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
-  <script src="js/jquery.js"></script>
-  <script src="js/bootstrap.js"></script>
+  <script src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.js"></script>
   <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,300,400,600,700,800" 
         rel="stylesheet" type="text/css">
 
-  <link rel="stylesheet" href="styles/main-default.css">
-
+  <link rel="stylesheet" href="../styles/main-default.css">
 
   <!-- Angular.js -->
   <!--
@@ -38,7 +37,7 @@
   <div id="template_body"> 
     <div class="row-fluid ">
         <div class="span10 offset1"
-            <img src="images/loading.gif">
+            <img src="../images/loading.gif">
         </div>
     </div>
   </div>
@@ -48,13 +47,14 @@
       <!--div class="fb-comments" data-href="" data-width="800" data-num-posts="10"></div-->
     </div>
   </div>
-
-  <!-- Facebook Comments Box -->
   <div class="row-fluid">
     <div class="span10 offset1" id="fb-comments">
       <div class="fb-comments span12" data-href="" data-width="800" data-num-posts="10"></div>
       <script type="text/javascript">
+        console.log( '.fb-comments:' + $('.fb-comments'));
+        console.log( '.fb-comments.data-href:' + $('.fb-comments').attr('data-href'));
         $('.fb-comments').attr('data-href', window.location.href);
+        console.log( '.fb-comments.data-href:' + $('.fb-comments').attr('data-href'));
       </script>
     </div>
   </div>

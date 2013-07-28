@@ -1,0 +1,47 @@
+<!-- Thin Widget Bar -->
+<div class="row-fluid widgets">
+    <div class="span10 offset1">
+        <!-- Tweet Button -->
+        <div class="span1 offset11" id="twbutton">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+        </div>
+</div>
+</div>
+
+
+
+<!-- Angular.js template for Project List -->
+<div class="row-fluid section1" ng-repeat="project in projects">
+    <div class="span10 offset1">
+        <textarea id="text-input" oninput="this.editor.update()" rows="1" cols="1" class="disabled">
+# WebApp Skeleton
+## Directories and Files
+- index.html
+    - Entry page. Everything begins here.
+    - Loads scripts and css files
+    - Has place holders for templates: about, header, body, and footer
+- js/
+    - Javascript files
+    - app_onload.js
+        - Loaded on load of the app page by index.html. It also loads other template html files asynchronously
+    - libs/
+        - JS Libraries such as markdown.js
+- templates/
+    - about.html
+        - Template for About Modal
+    - header.html
+        - Template for Header area of the app page such as navigation bar and tagline
+    - body.html
+        - Template for main body of the page. Most of the content should come here
+    - footer.html
+        - Template for Footer area of the app page such as FAQ and License
+- conf/
+    - tagline.txt
+        - Text in HTML format that lazily loaded and displayed in tagline area of Header area
+        </textarea>
+
+     <div id="preview"> </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,1 @@
+Copy public/appskel/ directory and create a new application by modifying it
