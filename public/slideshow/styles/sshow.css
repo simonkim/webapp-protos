@@ -1,0 +1,19 @@
+#sshow{
+    background-color:#F5F5F5;
+    border:1px solid #FFFFFF;
+    height:340px;
+    margin:10px auto 0;
+    position:relative;
+    width:640px;
+
+    -moz-box-shadow:0 0 22px #111;
+    -webkit-box-shadow:0 0 22px #111;
+    box-shadow:0 0 22px #111;
+}
+
+#sshow canvas {
+	margin:10px;
+}
+#sshow img {
+	margin:10px;
+}

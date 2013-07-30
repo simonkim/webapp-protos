@@ -27,8 +27,6 @@ function app_load_template( elementId, url, done ) {
             document.getElementById(elementId).innerHTML = xmlhttp.responseText;
             console.log( 'DONE: app_load_template( id:' + elementId + ', url:' + url + ' )' );
             if ( done ) done();
-        } else {
-            console.log( 'app_load_template: status=' + xmlhttp.status + ', readyState=' + xmlhttp.readyState );
         }
     } 
     xmlhttp.open("GET", url ,true); 
@@ -45,4 +43,7 @@ app_load_template( "template_header", "templates/header.html", function() {
     app_load_template( "template_about", "templates/about.html" );
 });
 app_load_template( "template_footer", "templates/footer.html" );
-app_load_template( "template_body", "templates/body.html" );
+app_load_template( "template_body", "templates/body.html", function() {
+   slideshow_api_init();
+   sshow_api_init();
+} );

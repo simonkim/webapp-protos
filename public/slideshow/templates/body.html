@@ -15,9 +15,23 @@
 
 <!-- Angular.js template for Project List -->
 <div class="row-fluid section1" ng-repeat="project in projects">
+    <!-- sshow -->
+    <div class="span8 offset2">
+        <h2> SShow Demo </h2>
+        <div id="sshow">
+            <div id="sshowslides">
+                <div class="sshowslide" data-src="images/photos/1.jpg"></div>
+                <div class="sshowslide" data-src="images/photos/2.jpg"></div>
+                <div class="sshowslide" data-src="images/photos/3.jpg"></div>
+                <div class="sshowslide" data-src="images/photos/4.jpg"></div>
+            </div>
+        </div>
+        <p class="text-center"> Work in progress </p>
+    </div>
 
     <!-- Bootstrap Carousel -->
     <div class="span8 offset2">
+        <h2> Twitter Bootstrap Carousel Demo </h2>
         <div id="carousel-example-generic" class="carousel slide">
           <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -26,41 +40,58 @@
                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
             </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="http://placehold.it/870x500" alt="">
-                <div class="carousel-caption">
-                    <h4>Slide #1</h4>
-                    <p> description </p>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="http://placehold.it/870x500" alt="">
+                    <div class="carousel-caption">
+                        <h4>Slide #1</h4>
+                        <p> description </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="http://placehold.it/870x500" alt="">
+                    <div class="carousel-caption">
+                        <h4>Slide #2</h4>
+                        <p> description </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="http://placehold.it/870x500" alt="">
+                    <div class="carousel-caption">
+                        <h4>Slide #3</h4>
+                        <p> description </p>
+                    </div>
                 </div>
             </div>
-            <div class="item">
-                <img src="http://placehold.it/870x500" alt="">
-                <div class="carousel-caption">
-                    <h4>Slide #2</h4>
-                    <p> description </p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="http://placehold.it/870x500" alt="">
-                <div class="carousel-caption">
-                    <h4>Slide #3</h4>
-                    <p> description </p>
-                </div>
-            </div>
-        </div>
 
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-            &lsaquo;
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-            &rsaquo;
-        </a>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                &lsaquo;
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                &rsaquo;
+            </a>
         </div>
-        <p class="text-center">Twitter Bootstrap Carousel</p>
+        <p class="text-center">Basic Configuration</p>
     </div>
+
+    <!-- jQuery & Canvas Slideshow -->
+    <div class="span8 offset2">
+        <h2> jQuery and Canvas Demo </h2>
+        <div id="slideshow">
+            <ul class="slides">
+                <li><img src="images/photos/1.jpg" width="620" height="320" alt="Photo 1"/></li>
+                <li><img src="images/photos/2.jpg" width="620" height="320" alt="Photo 2"/></li>
+                <li><img src="images/photos/3.jpg" width="620" height="320" alt="Photo 3"/></li>
+                <li><img src="images/photos/4.jpg" width="620" height="320" alt="Photo 4"/></li>
+            </ul>
+            <span class="arrow previous"></span>
+            <span class="arrow next"></span>
+        </div>
+    </div>
+
+
 </div>
 
 
