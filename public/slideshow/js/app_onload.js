@@ -44,6 +44,5 @@ app_load_template( "template_header", "templates/header.html", function() {
 });
 app_load_template( "template_footer", "templates/footer.html" );
 app_load_template( "template_body", "templates/body.html", function() {
-   slideshow_api_init();
    sshow_api_init();
 } );
