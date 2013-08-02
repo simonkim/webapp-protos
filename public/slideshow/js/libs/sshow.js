@@ -3,7 +3,7 @@ console.log( 'sshow.js loaded');
 
 var supportCanvas = false;
 var sshow_canvas;
-var sshow_slides = [];
+var sshow_slides = [];      /* src: img: text: */
 var sshow_current_slide_index;
 var sshow_width;
 var sshow_height;
@@ -20,7 +20,6 @@ function sshow_create_canvas(width, height) {
     var canvas            = document.createElement('canvas'),
         canvasContext    = canvas.getContext("2d");
 
-    // Make it the same size as the image
     canvas.width = width;
     canvas.height = height;
     console.log( 'canvas:' + canvas.width + 'x' + canvas.height);
@@ -77,20 +76,32 @@ var sshow_load_slide = function(index) {
     }
 
     console.log( 'sshow_load_slide(): index=' + index);
-    var img = sshow_slides[index].img;
-    if ( !img ) {
-        sshow_load_img( sshow_slides[index].src, function(img) {
-            /* load and cache */
-            console.log( 'sshow: image loaded: src=' + $(img).attr('src') + ' '+ img.width + 'x' + img.height);
+    if ( sshow_slides[index].src ) {
+        /* Load Image from 'src' */
+        var img = sshow_slides[index].img;
+        if ( !img ) {
+            sshow_load_img( sshow_slides[index].src, function(img) {
+                /* load and cache */
+                console.log( 'sshow: image loaded: src=' + $(img).attr('src') + ' '+ img.width + 'x' + img.height);
 
-            sshow_slides[index].img = img;
+                sshow_slides[index].img = img;
+                sshow_current_slide_index = index;
+                sshow_show_img( img );
+            });
+        } else {
+            /* use the cached img */
             sshow_current_slide_index = index;
             sshow_show_img( img );
-        });
-    } else {
-        /* use the cached img */
+        }
+    } else /* if ( sshow_slides[index].text ) */ {
+        /* Test of Text Slide */
+        var textSlide = document.createElement('p');
+
+        $(textSlide).text( sshow_slides[index].text);
+        $(textSlide).addClass('text-center');
+        sshow_slides[index].element = textSlide;
         sshow_current_slide_index = index;
-        sshow_show_img( img );
+        sshow_show_img( textSlide );
     }
 };
 
@@ -113,15 +124,19 @@ var sshow_init = function (){
     sshow_width = 620;
     sshow_height = 320;
 
+
     slides.each( function(index, slide) {
+        var text = $(slide).attr('data-text');
+        var src = $(slide).attr('data-src');
         console.log( 'sshow: slide[' + index + ']:' + $(slide).attr('data-src') );
-        sshow_slides.push( {src: $(slide).attr('data-src') });
+        sshow_slides.push( {src: src, text:text });
     });
+
+    sshow_slides.push( {text: 'dzpub.com'});
 
     console.log( sshow_slides.length + ' slides');
 
-    /* Load the first slide */
-    sshow_load_slide();
+    /* Load the first slide and auto advance */
 
     (function autoAdvance(){
         sshow_load_slide();

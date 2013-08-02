@@ -17,3 +17,12 @@
 #sshow img {
 	margin:10px;
 }
+#sshow p {
+    margin:10px;
+    background-color:black;
+    color:white;
+    width:620px;
+    height:320px;
+    line-height:320px;
+    font-size:xx-large;
+}
