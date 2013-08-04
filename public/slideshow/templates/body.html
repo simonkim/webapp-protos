@@ -19,7 +19,7 @@
         <div class="tabbable"> <!-- Only required for left/right tabs -->
             <ul class="nav nav-tabs">
             <li class="active"><a href="#tab1" data-toggle="tab">SShow Demo</a></li>
-            <li><a href="#tab2" data-toggle="tab">blueimp/Gallery</a></li>
+            <li><a href="gallery-fullscreen.html" >blueimp/Gallery Fullscreen</a></li>
             <li><a href="gallery-switch.html" >blueimp/Gallery Carousel</a></li>
             </ul>
 
@@ -41,35 +41,6 @@
                     </div> 
 
                     <p class="text-center"> Work in progress </p>
-
-                </div>
-                <!-- blueimp/Gallery -->
-                <div class="tab-pane" id="tab2">
-                    <p>Gallery</p>
-                    <!-- Placeholder for Fullscreen Gallery -->
-                    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-control">
-                        <div class="slides"></div>
-                        <h3 class="title"></h3>
-                        <a class="prev">‹</a>
-                        <a class="next">›</a>
-                        <a class="close">×</a>
-                        <a class="play-pause"></a>
-                        <ol class="indicator"></ol>
-                    </div>
-                    <!-- List of image links -->
-                    <div id="links">
-                        <a href="images/photos/1.jpg" title="Banana">
-                            <img src="images/photos/1.jpg" width="200" height="160">
-                        </a>
-                        <a href="images/photos/2.jpg" title="Apple">
-                            <img src="images/photos/2.jpg" width="200" height="160">
-                        </a>
-                        <a href="images/photos/3.jpg" title="Orange">
-                            <img src="images/photos/3.jpg" width="200" height="160">
-                        </a>
-                    </div>  
-                    <button class="btn btn-primary" type="button" id="btn-launch">Fullscreen</button>
- 
                 </div>
             </div>
         </div>
@@ -88,40 +59,5 @@
     sshow_api_init();
 </script>
 
-<!-- Fullscreen Slideshow without a Carousel -->
-<script type="text/javascript">
-    /* Launch -> Fullscreen Gallery */
-    document.getElementById('btn-launch').onclick = function (event) {
-        console.log( 'btn-launch');
-        var links = document.getElementById('links').getElementsByTagName('a');
-        if ( links.length > 0 ) {
 
-            console.log( 'links[0]:' + links[0]);
-            var options = {
-                index: links[0], 
-                event: event,
-                startSlideshow: true,
-            };
-            blueimp.Gallery(links, options); 
-        }
-    };
-    
-    /* Image -> Fullscreen Gallery starting at the image */
-    document.getElementById('links').onclick = function (event) {
-        event = event || window.event;
-        var target = event.target || event.srcElement,
-            link = target.src ? target.parentNode : target,
-            options = {
-                index: link, 
-                event: event,
-                startSlideshow: true,
-            },
-            links = this.getElementsByTagName('a');
-
-        console.log( 'link:' + link);
-        console.log( 'event:' + event);
-
-        blueimp.Gallery(links, options);   
-    };
-</script>
 
