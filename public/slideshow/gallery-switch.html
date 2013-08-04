@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> Slideshow | WebApp Protos </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="../css/social-buttons.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+  <!--script src="../js/jquery.js"></script-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="../js/bootstrap.js"></script>
+  <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,300,400,600,700,800" 
+        rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="../styles/main-default.css">
+  <!-- blueimp/Gallery -->
+  <link rel="stylesheet" href="css/blueimp-gallery.min.css">
+
+
+</head>
+<body>
+  <!-- Facebook JS SDK -->
+  <div id="fb-root"></div>
+  <script type="text/javascript" src="js/fbsdk.js"> </script>
+
+  <div id="template_header">
+    <!-- project-header.html -->
+  </div>
+
+<div class="row-fluid section1" >
+    <!-- Small Carousel -->
+    <div class="span8 offset2">
+        <div class="tabbable"> <!-- Only required for left/right tabs -->
+            <ul class="nav nav-tabs">
+            <li><a href="/slideshow" >SShow Demo</a></li>
+            <li><a href="/slideshow/#tab2" >blueimp/Gallery</a></li>
+            <li class="active"><a href="galley-switch.html" >blueimp/Gallery Carousel</a></li>
+            </ul>
+        </div>
+        <p>Gallery Carousel</p>
+        <button class="btn" type="button" id="btn-playpause">Pause</button>
+        <button class="btn" type="button" id="btn-fullscreen">Fullscreen</button>
+    
+        <!-- Placeholder for In-place Gallery -->
+        <div id="blueimp-image-carousel-emb" class="blueimp-gallery blueimp-gallery-carousel" style="max-width:320px; height:240px;">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="play-pause"></a>
+        </div>        
+        <!-- Placeholder for Fullscreen Gallery -->
+        <div id="blueimp-fullscreen" class="blueimp-gallery blueimp-gallery-control">
+          <div class="slides"></div>
+          <h3 class="title"></h3>
+          <a class="prev">‹</a>
+          <a class="next">›</a>
+          <a class="close">×</a>
+          <a class="play-pause"></a>
+          <ol class="indicator"></ol>
+        </div>  
+    </div>
+</div>
+
+  <div class="row-fluid">
+    <div class="span10 offset1" id="fb-comments">
+      <div class="fb-comments span12" data-href="" data-width="800" data-num-posts="10"></div>
+      <script type="text/javascript">
+        $('.fb-comments').attr('data-href', window.location.href);
+      </script>
+    </div>
+  </div>
+
+<div id="template_footer">
+    <!-- project-footer.html -->
+</div>
+
+
+<script type="text/javascript" src="js/libs/blueimp-gallery.min.js"></script>
+<script type="text/javascript">
+  var gallery;
+  var playing = true;
+
+  /* [Play/Pause] Button */
+  $('#btn-playpause').click( function(event){
+      console.log( 'play/pause: playing:' + playing);
+      if ( gallery ) {
+          if ( playing ) {
+              gallery.pause();
+              $(this).text('Play');
+          } else {
+              gallery.play();
+              $(this).text('Pause');
+          }
+          playing = !playing;
+      }
+
+  });
+
+  /* [Fullscreen] Button */
+  $('#btn-fullscreen').click( function(event){
+      console.log( 'fullscreen: playing:' + playing);
+      if ( gallery ) {
+          /* pause first */
+          if ( playing ) {
+              gallery.pause();
+              playing = !playing;
+          }
+          /* launch a full screen gallery */
+          var pos = gallery.getIndex();
+          var links = gallery.list;
+          console.log( 'pos:' + pos);
+          console.log( 'links:' + links);
+
+          var galleryFullscreen = blueimp.Gallery( links, {
+              index:links[pos],
+              container: '#blueimp-fullscreen',
+              startSlideshow: true,
+              onslide: function(index, slide) {
+                  /* sync. carousel with the current index */
+                  gallery.slide(index);
+              },
+              onclose: function() {
+                  /* resume */
+                  gallery.play();
+                  $(this).text('Pause');
+                  playing = true;
+              }
+          });
+      }
+
+  });
+
+  var sampleImageSource = function(ready) {
+
+    /* Construct List of Images and create a Carousel Gallery object */
+    $.ajax({
+        url: window.location.protocol === 'https:' ?
+                'https://secure.flickr.com/services/rest/' :
+                'http://api.flickr.com/services/rest/',
+        data: {
+            format: 'json',
+            method: 'flickr.interestingness.getList',
+            api_key: '7617adae70159d09ba78cfec73c13be3'
+        },
+        dataType: 'jsonp',
+        jsonp: 'jsoncallback'
+    }).done(function (result) {
+        var carouselLinks = [],
+            linksContainer = $('#clinks'),
+            baseUrl;
+        // Add the demo images as links with thumbnails to the page:
+        $.each(result.photos.photo, function (index, photo) {
+            baseUrl = 'http://farm' + photo.farm + '.static.flickr.com/' +
+                photo.server + '/' + photo.id + '_' + photo.secret;
+            $('<a/>')
+                .append($('<img>').prop('src', baseUrl + '_s.jpg'))
+                .prop('href', baseUrl + '_b.jpg')
+                .prop('title', photo.title)
+                .attr('data-gallery', '')
+                .appendTo(linksContainer);
+
+            console.log( 'baseUrl:' + baseUrl);
+            carouselLinks.push({
+                href: baseUrl + '_c.jpg',
+                title: photo.title
+            });
+        });
+        
+        ready( carouselLinks );
+    }); 
+  };
+
+  sampleImageSource( function(carouselLinks) {
+        // Initialize the Gallery as image carousel:
+        gallery = blueimp.Gallery(carouselLinks, {
+            container: '#blueimp-image-carousel-emb',
+            carousel: true,
+            fullScreen: true
+        });
+  });
+ </script>
+</body>
+</html>
